@@ -35,54 +35,53 @@
 #unzip(zipfile, exdir = "./data")
 
 #### Step 1 get the data #####
-
-
-## 1a data that is in both test and train
+## data that is in both test and train
 features   = read.table("./data/UCI HAR Dataset/features.txt")
 activities = read.table("./data/UCI HAR Dataset/activity_labels.txt")
 
-fixActivities <- function(x) { sub("_"," ",tolower(x)  ) }
 
-
-
-### http://stackoverflow.com/questions/21712384/updating-column-in-one-dataframe-with-value-from-another-dataframe-based-on-matc
-
-activitytest$V2 <- activities[match(activitytest$V1, activities$V1), 2]
-
-
-## 1b. Get the test data 30% of the observations
+## Test data 30% of observations 2947 rows
 subjecttest = read.table("./data/UCI HAR Dataset/test/subject_test.txt")
 activitytest  = read.table("./data/UCI HAR Dataset/test/y_test.txt")
-
 datatest    = read.table("./data/UCI HAR Dataset/test/x_test.txt", col.names = features$V2)
 
-## 1c. Get the train data 70% of the observations
+##  train data 70% of the observations 7352 rows
 subjecttrain = read.table("./data/UCI HAR Dataset/train/subject_train.txt" )
 activitytrain  = read.table("./data/UCI HAR Dataset/train/y_train.txt")
-
 datatrain    = read.table("./data/UCI HAR Dataset/train/x_train.txt", col.names = features$V2)
 
+# replace activities numbers with Names
+activitytest$V2 <- activities[match(activitytest$V1, activities$V1), 2]
+activitytrain$V2 <- activities[match(activitytrain$V1, activities$V1), 2]
 
 
-###  Step 2. Shape the data   
+###  Step 2. subset the data   
 ### 10299 rows:  all observarions 7352 + 2947 
 ### 68 columns: 66 measures for mean() and std() + subject + activity
 
-##2.a get the columns of interest to the assignment
+## get the columns of interest to the assignment
 meanstdtrain <- datatrain[, grepl("(mean\\(\\))|(std\\(\\))" ,features$V2) ]
 meanstdtest <- datatest[, grepl("(mean\\(\\))|(std\\(\\))" ,features$V2) ]
 
 
-fulltest <- cbind(subjecttest$V1,labeltest$V1,meanstdtest)
+fulltest  <- cbind(subjecttest$V1, activitytest$V2,meanstdtest)
+fulltrain <- cbind(subjecttrain$V1,activitytrain$V2,meanstdtrain)
 
-fulltrain <- cbind(subjecttrain$V1,labeltrain$V1,meanstdtrain)
+names(fulltest)[1] <- "subject"
+names(fulltest)[2] <-"activity" 
+names(fulltrain)[1] <- "subject"
+names(fulltrain)[2] <-"activity" 
 
+###fixActivities <- function(x) { sub("_"," ",tolower(x)  ) }
 
 fulldf <- rbind(fulltrain, fulltest)
 
 
+### Step 3. Create the average over each variable for activity and subject.
 
+### use plyr
+library(plyr)
+library(reshape2)
+ melted <- melt(fulldf, id.vars = c("subject" , "activity"))
 
-
-
-
+ddply(melted, c("subject", "activity", "variable"), summarise,  mean= mean(value) ) 
