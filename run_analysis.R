@@ -1,25 +1,23 @@
-# Cleaning data coursera run_analysis.R
+# Cleaning data coursera run_analysis.R 
+# Week 4 Assignment
 # Ann Crawford
 # Date 2/7/2017
 
-##http://vita.had.co.nz/papers/tidy-data.pdf
+#############################################################################
+# This script downloads, several files, reads the files and produces a single
+# tidy data set that summarizes a subset of the varaibles.
+# Code book:
+# Read me:
+##############################################################################
 
 ### tidy data set
 # Each variable forms a column
 # Echar observation forms a row
 # Each table sores data about one kind of observation
 
-# reading code book files
-# https://www.r-bloggers.com/reading-codebook-files-in-r/
-# http://www.medicine.mcgill.ca/epidemiology/joseph/pbelisle/CodebookCookbook.html
-#######################
-# there are 33 measurements: 8 with xyz values = 24 + 9 magnitude measures for a total of 33 measuremnts
-#
-#
-
-
+##########
 # get zipfile from the web put it in data folder
-
+#############
 #zipurl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
 
 #if(!file.exists("./data")) {dir.create("./data")}
@@ -55,8 +53,9 @@ activitytest$V2 <- activities[match(activitytest$V1, activities$V1), 2]
 activitytrain$V2 <- activities[match(activitytrain$V1, activities$V1), 2]
 
 
-###  Step 2. subset the data   
+### Step 2. subset the data   
 ### 10299 rows:  all observarions 7352 + 2947 
+### there are 33 measurements: 8 with xyz values = 24 + 9 magnitude measures for a total of 33 measuremnts
 ### 68 columns: 66 measures for mean() and std() + subject + activity
 
 ## get the columns of interest to the assignment
@@ -89,3 +88,5 @@ library(reshape2)
  ## 4     columns: the subject, activity, measurement, mean
 finaldf <-ddply(melted, c("subject", "activity", "variable"), summarise,  mean= mean(value) ) 
 
+table(finaldf)
+names(finaldf)
