@@ -1,6 +1,6 @@
-# cleaning data coursera run_analysis.R
+# Cleaning data coursera run_analysis.R
 # Ann Crawford
-#Date 2/7/2017
+# Date 2/7/2017
 
 ##http://vita.had.co.nz/papers/tidy-data.pdf
 
@@ -84,4 +84,8 @@ library(plyr)
 library(reshape2)
  melted <- melt(fulldf, id.vars = c("subject" , "activity"))
 
-ddply(melted, c("subject", "activity", "variable"), summarise,  mean= mean(value) ) 
+### final shape is
+ ## 11880 rows : 6 activities x 30 subject x 66 measurements
+ ## 4     columns: the subject, activity, measurement, mean
+finaldf <-ddply(melted, c("subject", "activity", "variable"), summarise,  mean= mean(value) ) 
+
