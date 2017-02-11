@@ -74,8 +74,6 @@ names(fulltest)[2]  <- "activity"
 names(fulltrain)[1] <- "subject"
 names(fulltrain)[2] <- "activity" 
 
-# remove CAPS and underscores from activity names 
-
 # replace activities numbers with Names
 activitytest$V2  <- activities[match(activitytest$V1, activities$V1), 2]
 activitytrain$V2 <- activities[match(activitytrain$V1, activities$V1), 2]
