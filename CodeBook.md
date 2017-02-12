@@ -4,8 +4,8 @@
 ----------------------------- | ------------------------------------ | ---------------------------
     subject  | Integer id of subject | 1-30
     activity | Text description of activity performed by subject. | "Walk","Walk Up","Walk Down","Sit","Lay" 
-	Mean     |
-	Variable | Measured signal standard deviation or mean. See below for value description|
+	Mean     | Mean of variable over subject and activity  | -0.99767 to 0.97451
+	Variable | Measured signal standard deviation or mean. **See below for value description. **|
 	||tBodyAcc-mean()-X
 	||tBodyAcc-mean()-Y
 	||tBodyAcc-mean()-Z
