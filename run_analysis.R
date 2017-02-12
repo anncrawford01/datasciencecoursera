@@ -77,16 +77,6 @@ colnames(datatest) = features$V2
 meanstdtrain <- datatrain[, grepl("(mean\\(\\))|(std\\(\\))" ,features$V2) ]
 meanstdtest <-  datatest[, grepl("(mean\\(\\))|(std\\(\\))" ,features$V2) ]
 
-
-fulltest  <- cbind(subjecttest$V1, activitytest$V2,meanstdtest)
-fulltrain <- cbind(subjecttrain$V1,activitytrain$V2,meanstdtrain)
-
-#4. Appropriately labels the data set with descriptive variable names.
-names(fulltest)[1]  <- "subject"
-names(fulltest)[2]  <- "activity" 
-names(fulltrain)[1] <- "subject"
-names(fulltrain)[2] <- "activity"
-
 activities[1,2] <- "Walk"
 activities[2,2] <- "Walk Up"
 activities[3,2] <- "Walk Down"
@@ -97,6 +87,17 @@ activities[6,2] <- "Lay"
 # replace activities numbers with Names
 activitytest$V2  <- activities[match(activitytest$V1, activities$V1), 2]
 activitytrain$V2 <- activities[match(activitytrain$V1, activities$V1), 2]
+
+fulltest  <- cbind(subjecttest$V1, activitytest$V2,meanstdtest)
+fulltrain <- cbind(subjecttrain$V1,activitytrain$V2,meanstdtrain)
+
+#4. Appropriately labels the data set with descriptive variable names.
+names(fulltest)[1]  <- "subject"
+names(fulltest)[2]  <- "activity" 
+names(fulltrain)[1] <- "subject"
+names(fulltrain)[2] <- "activity"
+
+
 
 #1. Merges the training and the test sets to create one data set.
 fulldf <- rbind(fulltrain, fulltest)
