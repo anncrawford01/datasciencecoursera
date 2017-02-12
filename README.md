@@ -18,7 +18,9 @@
 	4. Appropriately labels the data set with descriptive variable names.
 	5. From the data set in step 4, creates a second, independent tidy data set with 
 	the average of each variable for each activity and each subject.
-	
+
+Here are the data for the project:
+https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
 
 ##Assignment Process
 The raw data conisiting of several text files from experiments carried out with a group of 30 volunteers
