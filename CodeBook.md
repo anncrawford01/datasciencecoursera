@@ -5,7 +5,7 @@
     subject  | Integer id of subject | 1-30
     activity | Text description of activity performed by subject. | "Walk","Walk Up","Walk Down","Sit","Lay" 
 	mean     | Mean of variable over subject and activity  | -0.99767 to 0.97451
-	variable | Measured signal standard deviation or mean. **See below for value description. **|
+	variable | 66 measured signals standard deviation or mean. **See below for value description. **|
 	||tBodyAcc-mean()-X
 	||tBodyAcc-mean()-Y
 	||tBodyAcc-mean()-Z
@@ -74,7 +74,7 @@
 	||fBodyBodyGyroJerkMag-std()
 	
 	
-### Explination of variable measure values.
+### Explaination of variable measure values.
 The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ.
 These time domain signals (prefix 't' to denote time) were captured at a constant rate of 50 Hz. Then they were filtered
 using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to 
