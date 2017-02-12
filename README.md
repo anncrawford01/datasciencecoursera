@@ -22,8 +22,13 @@
 
 ##Assignment Process
 The raw data conisiting of several text files from experiments carried out with a group of 30 volunteers
-over 6 activities with a 561-feature vector with time and frequency domain variable.  There were a total of 561 features
-and 10299 observations, 2947 observations in x_test.txt and 7352 observations in x_train.txt.
+over 6 activities with a 561-feature vector with time and frequency domain variable. 
+There were a total of 561 features, 2947 observations in x_test.txt and 7352 observations in x_train.txt.
+The script required install.packages('plyr'), library(plyr), install.packages('reshape2'), library(reshape2).
+
+### Requirement 3 Merge the training and the test sets to create one data set.
+The merged dataset contained 10299 observations. It was merged after subsetting on mean and standard deviation
+and renaming the columns to match for the rbind function.  
  
 ### Requirement 2 extract only the measurements on the mean and standard deviation for each measurement.
 This was a judgement call that required subsetting the 561 feature vector.  Based on the experiment's Feature_Info.txt,
@@ -36,20 +41,27 @@ The **activity names** where replaced with the names from the activity_labels.tx
 proper case. 
 
 ### Requirement 4 appropriately label the data set with descriptive variable names.
-The column names subject and activity replaced V1 and V2.  The remaining 66 variable names the 66 mean() and std()
-feature vector.  This were not changed from the original.
+The column names subject and activity replaced V1 and V2.  The remaining 66 variable names are the original 66 mean() and std()
+descriptions in the feature vector.  
+
+### Requirement 5 create a second, independent tidy data set with the average of each variable for each activity and each subject. 
+This dataset contained 11880 rows  (6 activities x 30 subject x 66 measurements) and 4 columns (subject, activity, measurement, mean).
+It was created by melting over subject and activity and summarizing using the mean function. 
 
 ## Tidy Data Set
 Tidy data is specific to the question being asked. In this case the question is
 unknown but the requirements define the final result to be and independent tidy data set 
 with the average of each variable for each activity and each subject.  While it may be possible to separate the 
 features into Gyro or Accelleration movements and further define if the direction was X,Y or Z.  This level of
-tidy manipulation was not required.
-
+tidy manipulation was not required. All column names are lower case with no spaces or blanks.
+** to view the final dataset **
+data4 <- read.table("./assignment4.txt", header = TRUE
+View(data4)
 
 
 	
 	
 ## References
-* https://thoughtfulbloke.wordpress.com/2015/09/09/getting-and-cleaning-the-assignment/ -David Hood
-* http://vita.had.co.nz/papers/tidy-data.pdf   - Hadley Wickham
+https://thoughtfulbloke.wordpress.com/2015/09/09/getting-and-cleaning-the-assignment/ -David Hood
+
+http://vita.had.co.nz/papers/tidy-data.pdf   - Hadley Wickham
